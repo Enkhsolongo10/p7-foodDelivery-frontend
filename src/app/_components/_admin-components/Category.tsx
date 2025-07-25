@@ -11,7 +11,6 @@ import {
 import { CategoryType } from "@/constants/types";
 import { IoAddSharp } from "react-icons/io5";
 
-
 export function AdminCategory() {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [value, setValue] = useState<string>("");
