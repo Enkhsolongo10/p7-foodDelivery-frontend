@@ -2,39 +2,12 @@
 
 import { useState } from "react";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 type Props = {
   onUpload: (url: string) => void;
 };
 
 export function Uploader({ onUpload }: Props) {
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string>();
   const [uploading, setUploading] = useState(false);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,11 +22,11 @@ export function Uploader({ onUpload }: Props) {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "fd-admin-images"); 
+    formData.append("upload_preset", "fd-admin-images");
 
     try {
       const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dvedrysvm/image/upload", 
+        "https://api.cloudinary.com/v1_1/dvedrysvm/image/upload",
         {
           method: "POST",
           body: formData,

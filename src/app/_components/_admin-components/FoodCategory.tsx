@@ -11,7 +11,7 @@ import {
 import { CategoryType } from "@/constants/types";
 import { IoAddSharp } from "react-icons/io5";
 
-export function AdminCategory() {
+export function FoodCategory() {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [value, setValue] = useState<string>("");
 
@@ -19,7 +19,7 @@ export function AdminCategory() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/admin/food-category"
+          "http://localhost:8000/food-category"
         );
         const data = await response.json();
         setCategories(data);
@@ -32,7 +32,7 @@ export function AdminCategory() {
 
   const addCategory = async (value: string) => {
     try {
-      await fetch("http://localhost:8000/admin/food-category", {
+      await fetch("http://localhost:8000/food-category", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export function AdminCategory() {
       console.log("Sending category:", value);
       setValue("");
 
-      const updated = await fetch("http://localhost:8000/admin/food-category");
+      const updated = await fetch("http://localhost:8000/food-category");
       const data = await updated.json();
       setCategories(data);
     } catch (error) {

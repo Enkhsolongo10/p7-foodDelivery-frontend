@@ -19,3 +19,21 @@ export type FormType = {
   image: string;
   category: string;
 };
+
+export type FoodCardProps = {
+  food: {
+    name: string;
+    price: number;
+    image?: string;
+    ingredients?: string;
+  };
+};
+
+
+export type Food = {
+  id: string;
+  name: string;
+  price: number;
+  image?: string;
+  ingredients?: string;
+};
