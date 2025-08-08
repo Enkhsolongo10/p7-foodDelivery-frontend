@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
-import { AdminEditFoodDialog } from "@/app/_components/AdminEditFoodDialog";
 import { Foods } from "@/constants/types";
-import { AdminFoodCategory } from "@/app/_components/AdminFoodCategory";
-import AdminSidebar from "@/app/_components/AdminSideBar"; 
+import Sidebar from "@/app/_components/admin-components/SideBar"; 
+import { FoodCategory } from "@/app/_components/admin-components/FoodCategory";
+import { EditFoodDialog } from "@/app/_components/admin-components/EditFoodDialog";
 
 export default function CategoryPage() {
   const { getToken } = useAuth();
@@ -36,8 +36,8 @@ export default function CategoryPage() {
   }, [query]);
 
   return (
-    <AdminSidebar >
-      <AdminFoodCategory />
+    <Sidebar >
+      <FoodCategory />
       <div className="p-6 rounded-lg bg-white mt-[84px]">
         <h2 className="text-xl font-bold">Category dishes</h2>
         <Link href="/admin">
@@ -71,11 +71,11 @@ export default function CategoryPage() {
                     {food?.ingredients}
                   </p>
                 </div>
-                <AdminEditFoodDialog food={food} />
+                <EditFoodDialog food={food} />
               </div>
             ))}
         </div>
       </div>
-    </AdminSidebar >
+    </Sidebar >
   );
 }

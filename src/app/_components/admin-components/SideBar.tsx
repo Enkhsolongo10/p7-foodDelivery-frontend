@@ -6,7 +6,7 @@ type LayoutProps = {
   children: ReactNode;
 };
 
-const AdminSidebar = ({ children }: LayoutProps) => {
+const Sidebar = ({ children }: LayoutProps) => {
   return (
     <div className="flex gap-8">
       <div className="max-w-[220px] w-[20%] h-[100vh] fixed bg-white shadow-md rounded-lg p-6">
@@ -50,4 +50,4 @@ const AdminSidebar = ({ children }: LayoutProps) => {
   );
 };
 
-export default AdminSidebar;
+export default Sidebar;

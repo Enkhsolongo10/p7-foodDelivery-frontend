@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Category } from "@/constants/types";
 import { useAuth } from "@clerk/nextjs";
-import { useAuthFetch } from "./useFetchData";
+import { useAdminFetch } from "@/hooks/useAdminFetch";
 
 type Props = {
   food: {
@@ -34,7 +34,7 @@ type Props = {
   };
 };
 
-export function AdminEditFoodDialog({ food }: Props) {
+export function EditFoodDialog({ food }: Props) {
   const [newFoodName, setNewFoodName] = useState<string>(food.foodName);
   const [newFoodIngredients, setNewFoodIngredients] = useState<string>(
     food.ingredients
@@ -44,7 +44,7 @@ export function AdminEditFoodDialog({ food }: Props) {
   const [newImage, setNewImage] = useState<string>(food.image);
 
   const { getToken } = useAuth();
-  const { isLoading, data: categories } = useAuthFetch("food-category");
+  const { isLoading, data: categories } = useAdminFetch("food-category");
   if (isLoading) return <div>Loading...</div>;
 
   async function deleteFoods() {

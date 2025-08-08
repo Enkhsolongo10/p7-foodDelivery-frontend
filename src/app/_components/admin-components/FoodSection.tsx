@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
-import { useAuthFetch } from "./useFetchData";
-import { AdminFoodCard } from "./AdminFoodCard";
 import { Category } from "@/constants/types";
+import { useAdminFetch } from "@/hooks/useAdminFetch";
+import { FoodCard } from "./FoodCard";
 
-export function AdminFoodSection() {
+export function FoodSection() {
   const { getToken } = useAuth();
-  const { isLoading, data: categories } = useAuthFetch("food-category");
+  const { isLoading, data: categories } = useAdminFetch("food-category");
   if (isLoading) return <div>Loading...</div>;
 
   return (
@@ -21,7 +21,7 @@ export function AdminFoodSection() {
           >
             <div>
               <div className="text-lg font-semibold">{category?.categoryName}</div>
-              <AdminFoodCard category={category} />
+              <FoodCard category={category} />
             </div>
           </div>
         ))}

@@ -7,7 +7,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 
-export default function Pfp() {
+export default function ProfilePicture() {
   const { user } = useUser();
   const { getToken } = useAuth();
 

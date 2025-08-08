@@ -11,7 +11,7 @@ import {
 import { IoAddSharp } from "react-icons/io5";
 import { Category } from "@/constants/types";
 
-export function AdminFoodCategory() {
+export function FoodCategory() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [value, setValue] = useState<string>("");
 

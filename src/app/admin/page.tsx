@@ -12,11 +12,10 @@
 //     )
 // };
 "use client";
-
-import { AdminFoodCategory } from "../_components/AdminFoodCategory";
-import { AdminFoodSection } from "../_components/AdminFoodSection";
-import AdminSidebar from "../_components/AdminSideBar";
-import Pfp from "../_components/Pfp";
+import AdminSidebar from "../_components/admin-components/SideBar";
+import Pfp from "../_components/admin-components/ProfilePicture";
+import { FoodCategory } from "../_components/admin-components/FoodCategory";
+import { FoodSection } from "../_components/admin-components/FoodSection";
 // type Props = {
 //   searchParams: Promise<{ category: string }>;
 // };
@@ -49,9 +48,9 @@ export default function Page() {
       <div className="relative">
         <Pfp />
       </div>
-      <AdminFoodCategory />
+      <FoodCategory />
       {/* {!category ? <Section /> : <div></div>} */}
-      <AdminFoodSection />
+      <FoodSection />
     </AdminSidebar>
   );
 }
