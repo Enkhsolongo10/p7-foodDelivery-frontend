@@ -8,11 +8,11 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { CategoryType } from "@/constants/types";
 import { IoAddSharp } from "react-icons/io5";
+import { Category } from "@/constants/types";
 
-export function FoodCategory() {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+export function AdminFoodCategory() {
+  const [categories, setCategories] = useState<Category[]>([]);
   const [value, setValue] = useState<string>("");
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export function FoodCategory() {
           "http://localhost:8000/food-category"
         );
         const data = await response.json();
+        console.log("Categories from API:", data);
         setCategories(data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
@@ -37,7 +38,7 @@ export function FoodCategory() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: value }),
+        body: JSON.stringify({ categoryName: value }),
       });
       console.log("Sending category:", value);
       setValue("");
@@ -51,7 +52,7 @@ export function FoodCategory() {
   };
 
   return (
-    <div className="mt-[30px] mb-[20px] bg-white py-5 px-5 w-[1260px] rounded-xl flex flex-col justify-center items-start gap-3">
+    <div className="bg-white p-5 w-[1219px] rounded-xl flex flex-col justify-center items-start gap-3">
       <p className="text-lg font-semibold h-[28px]">Dishes Category</p>
       <div className="text-sm font-medium flex flex-wrap gap-3">
         {categories.map((category) => (
@@ -59,7 +60,7 @@ export function FoodCategory() {
             key={category?._id}
             className="hover:bg-[#EF4444] px-3 text-black hover:border-black hover:text-white h-[36px] rounded-full bg-white border-[1px] border-[#E4E4E7]"
           >
-            {category?.name}
+            {category.categoryName}
           </Badge>
         ))}
 

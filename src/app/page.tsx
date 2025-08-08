@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Container from "./_components/_user-components/Container";
-import Header from "./_components/_user-components/Header";
+import Container from "./_components/Container";
+import Header from "./_components/Header";
 
 export default function Page() {
   return (

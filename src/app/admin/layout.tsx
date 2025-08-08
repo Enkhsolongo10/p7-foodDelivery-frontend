@@ -1,69 +1,39 @@
-import { Badge } from "@/components/ui/badge";
 import {
   ClerkProvider,
   SignInButton,
   SignedIn,
   SignedOut,
-  UserButton,
-  SignUpButton,
 } from "@clerk/nextjs";
-import Admin from "./page";
-import AdminMainPage from "./page";
-import AdminPage from "./page";
+import Image from "next/image";
 
-export default function AdminLayout({
+export default function Layout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="flex bg-stone-200">
-      <div className="bg-white h-[screen] w-[205px] flex flex-col items-center">
-        <div className="w-[170px] h-[44px] flex items-center gap-3 mt-10">
-          <img className="w-[36px] h-[29.18px]" src="headerLogo.png" />
-          <div>
-            <div className="flex">
-              <p className="text-black text-xl font-semibold">NomNom</p>
+    <ClerkProvider>
+      <SignedOut>
+        <SignInButton>
+          <div className="flex items-center justify-center h-screen bg-gray-100">
+            <div className="flex flex-col items-center justify-center space-y-4">
+              <Image
+                src="/assets/logo.svg"
+                alt="logo"
+                width={100}
+                height={100}
+              />
+              <h1 className="text-3xl font-semibold text-gray-800">
+                Welcome to Food Admin
+              </h1>
+              <button className="px-6 py-3 text-lg font-semibold text-white bg-red-500 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                Log in as an Admin
+              </button>
             </div>
-            <p className="text-[#71717A] text-sm">Swift Delivery</p>
           </div>
-        </div>
-        <div className="flex flex-col items-start gap-7 mt-5">
-          <Badge className="w-[165px] h-[40px] rounded-full bg-screen text-black hover:bg-black hover:text-white">
-            Food menu
-          </Badge>
-          <Badge className="w-[165px] h-[40px] rounded-full  bg-screen text-black hover:bg-black hover:text-white">
-            Order
-          </Badge>
-          <Badge className="w-[165px] h-[40px] rounded-full  bg-screen text-black hover:bg-black hover:text-white">
-            Settings
-          </Badge>
-        </div>
-      </div>
-      <div>
-        <AdminPage />
-      </div>
-
-      {/* <SignedOut>
-            <SignInButton>
-              <button className="bg-black w-[100px] h-[50px] text-white rounded-lg">Log in</button>
-            </SignInButton>
-
-            <SignUpButton>
-              <button className="bg-black w-[100px] h-[50px] text-white rounded-lg">Sign up</button>
-            </SignUpButton>
-          </SignedOut>
-
-          <SignedIn>
-            <div>
-
-              <div className="h-[30px] w-full bg-[#18181B1] flex justify-end mt-5">
-                 <UserButton />
-                 <Admin />
-              </div>
-              {children}
-            </div>
-          </SignedIn> */}
-    </div>
+        </SignInButton>
+      </SignedOut>
+      <SignedIn>
+        <div className="bg-stone-100">{children}</div>
+      </SignedIn>
+    </ClerkProvider>
   );
 }
