@@ -15,7 +15,7 @@
 import AdminSidebar from "../_components/admin-components/SideBar";
 import Pfp from "../_components/admin-components/ProfilePicture";
 import { FoodCategory } from "../_components/admin-components/FoodCategory";
-import { FoodSection } from "../_components/admin-components/FoodSection";
+import { FoodCardSection } from "../_components/admin-components/FoodCardSection";
 // type Props = {
 //   searchParams: Promise<{ category: string }>;
 // };
@@ -50,7 +50,7 @@ export default function Page() {
       </div>
       <FoodCategory />
       {/* {!category ? <Section /> : <div></div>} */}
-      <FoodSection />
+      <FoodCardSection />
     </AdminSidebar>
   );
 }

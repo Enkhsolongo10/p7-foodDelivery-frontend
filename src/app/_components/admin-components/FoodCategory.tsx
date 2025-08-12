@@ -18,9 +18,7 @@ export function FoodCategory() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:8000/food-category"
-        );
+        const response = await fetch("http://localhost:8000/food-category");
         const data = await response.json();
         console.log("Categories from API:", data);
         setCategories(data);
@@ -52,7 +50,7 @@ export function FoodCategory() {
   };
 
   return (
-    <div className="bg-white p-5 w-[1219px] rounded-xl flex flex-col justify-center items-start gap-3">
+    <div className="bg-white pt-5 pb-6 px-8 w-[1219px] rounded-xl flex flex-col justify-center items-start gap-3">
       <p className="text-lg font-semibold h-[28px]">Dishes Category</p>
       <div className="text-sm font-medium flex flex-wrap gap-3">
         {categories.map((category) => (
@@ -76,9 +74,7 @@ export function FoodCategory() {
               Add new category
             </DialogTitle>
 
-            <DialogTitle className="mb-1">
-              Category name
-            </DialogTitle>
+            <DialogTitle className="mb-1 text-[16px]">Category name</DialogTitle>
             <input
               className="text-sm -mt-10 h-[38px] p-1 border border-1 border-[#E4E4E7] rounded-md hover:border hover:border-black"
               type="text"

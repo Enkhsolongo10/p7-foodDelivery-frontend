@@ -1,57 +1,66 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import { FoodCardProps, Foods } from "@/constants/types";
 import { AddFoodDialog } from "./AddFoodDialog";
-import { useAuth } from "@clerk/nextjs";
-import { useAddFood } from "@/hooks/useAddFood";
+import { FoodCardProps } from "@/constants/types";
 import { EditFoodDialog } from "./EditFoodDialog";
 
-export function FoodCard({ category }: FoodCardProps) {
-  const [foods, setFoods] = useState<Foods[]>([]);
-  const { getToken } = useAuth();
-  const { addFood } = useAddFood();
 
-  async function fetchFoods() {
-    const token = await getToken();
-    if (!token) return;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/food/${category._id}`, {
-      headers: { authentication: token },
-    });
-    const data = await res.json();
-    setFoods(data);
-  }
+type Food = {
+  _id: string;
+  foodName: string;
+  price: number;
+  ingredients?: string;
+  image?: string;
+};
+
+export function FoodCard({ category }: FoodCardProps) {
+  const [foods, setFoods] = useState<Food[]>([]);
 
   useEffect(() => {
-    if (category?._id) fetchFoods();
+    if (!category || !category._id) return; // category бүрэн ирээгүй бол fetch хийхгүй
+
+    const fetchFoods = async () => {
+      try {
+        const res = await fetch(`http://localhost:8000/food/${category._id}`);
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        setFoods(data);
+      } catch (error) {
+        console.error("Failed to fetch foods", error);
+      }
+    };
+
+    fetchFoods();
   }, [category]);
 
-  async function handleAdd(food: { foodName: string; price: string; ingredients: string; image: string }) {
-    const createdFood = await addFood({ ...food, categoryId: category._id });
-    if (createdFood) setFoods((prev) => [...prev, createdFood]);
-  }
-
   return (
-    <div className="flex flex-wrap gap-6 justify-center items-center">
-      <AddFoodDialog categoryId={category._id} onAdd={handleAdd} />
-
-      {foods.map((food) => (
-        <div
-          key={food._id}
-          className="w-[270px] h-[241px] mt-3 rounded-[20px] border-2 border-[#E4E4E7] overflow-hidden shadow-md hover:shadow-lg transition-all relative"
-        >
-          <div className="w-[90%] h-[120px] rounded-lg overflow-hidden mt-[10px] ml-[13px]">
-            <img src={food.image} alt={food.foodName} className="object-cover w-full h-full" />
-          </div>
-          <div className="p-4 h-[90px]">
-            <div className="flex justify-between">
-              <p className="text-md font-semibold text-[#EF4444] truncate">{food.foodName}</p>
-              <p className="text-sm text-gray-500">${food.price}</p>
+    <div className="mt-2 bg-white rounded-xl w-[1171px] flex gap-5 flex-wrap">
+      <div className="flex flex-wrap gap-5">
+        <AddFoodDialog category={category} />
+        {foods.map((food) => (
+          <div
+            key={food._id}
+            className="border rounded-2xl p-3 w-[270px] h-[241px] shadow-sm"
+          >
+            <div className="h-[120px] mb-3 bg-gray-100 rounded-md flex items-center justify-center overflow-hidden">
+              <img
+                src={food.image}
+                alt={food.foodName}
+                className="object-cover w-full h-full"
+              />
+              {/* <EditFoodDialog food={food} /> */}
             </div>
-            <p className="text-[12px] text-gray-600 line-clamp-2">{food.ingredients}</p>
+            <div className="flex justify-between items-center mb-1">
+              <p className="text-red-500 font-semibold truncate">
+                {food.foodName}
+              </p>
+              <p className="">${food.price}</p>
+            </div>
+            <p className="text-xs line-clamp-2">{food.ingredients}</p>
           </div>
-          <EditFoodDialog food={food} />
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
