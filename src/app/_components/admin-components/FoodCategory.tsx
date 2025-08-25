@@ -11,16 +11,21 @@ import {
 import { IoAddSharp } from "react-icons/io5";
 import { Category } from "@/constants/types";
 
-export function FoodCategory() {
+type FoodCategoryProps = {
+  onCategoryClick: (categoryName: string) => void;
+};
+
+export function FoodCategory({ onCategoryClick }: FoodCategoryProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [value, setValue] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:8000/food-category");
         const data = await response.json();
-        console.log("Categories from API:", data);
         setCategories(data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
@@ -33,12 +38,9 @@ export function FoodCategory() {
     try {
       await fetch("http://localhost:8000/food-category", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ categoryName: value }),
       });
-      console.log("Sending category:", value);
       setValue("");
 
       const updated = await fetch("http://localhost:8000/food-category");
@@ -55,8 +57,9 @@ export function FoodCategory() {
       <div className="text-sm font-medium flex flex-wrap gap-3">
         {categories.map((category) => (
           <Badge
-            key={category?._id}
-            className="hover:bg-[#EF4444] px-3 text-black hover:border-black hover:text-white h-[36px] rounded-full bg-white border-[1px] border-[#E4E4E7]"
+            key={category._id}
+            className="hover:bg-red-600 px-3 text-black hover:border-black hover:text-whi h-[36px] rounded-full bg-white border-[1px] border-[#E4E4E7] cursor-pointer"
+            onClick={() => onCategoryClick(category.categoryName)}
           >
             {category.categoryName}
           </Badge>
@@ -64,7 +67,7 @@ export function FoodCategory() {
 
         <Dialog>
           <DialogTrigger asChild>
-            <button className="bg-[#EF4444] w-[36px] h-[36px] text-white rounded-full items-center justify-center flex text-2xl">
+            <button className="bg-red-600 w-[36px] h-[36px] text-white rounded-full items-center justify-center flex text-2xl">
               <IoAddSharp />
             </button>
           </DialogTrigger>

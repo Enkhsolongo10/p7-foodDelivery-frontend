@@ -2,11 +2,7 @@ import { ReactNode } from "react";
 import { LayoutDashboard, Truck, Settings } from "lucide-react";
 import Link from "next/link";
 
-type LayoutProps = {
-  children: ReactNode;
-};
-
-const Sidebar = ({ children }: LayoutProps) => {
+const AdminSidebar = () => {
   return (
     <div className="flex gap-8">
       <div className="max-w-[220px] w-[20%] h-[100vh] fixed bg-white shadow-md rounded-lg p-6">
@@ -17,6 +13,7 @@ const Sidebar = ({ children }: LayoutProps) => {
               alt="Logo"
               width={46}
               height={37.29}
+              className="text-red-600"
             />
             <div>
               <b className="text-lg text-black text-12">NomNom</b>
@@ -45,9 +42,9 @@ const Sidebar = ({ children }: LayoutProps) => {
           </div>
         </div>
       </div>
-      <div className="w-[80%] ml-[240px] p-6 space-y-8">{children}</div>
+      {/* <div className="w-[80%] ml-[240px] p-6 space-y-8">{children}</div> */}
     </div>
   );
 };
 
-export default Sidebar;
+export default AdminSidebar;

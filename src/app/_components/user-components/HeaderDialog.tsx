@@ -57,7 +57,7 @@ const HeaderDialog = () => {
       </Dialog>
 
       <Dialog>
-        <DialogTrigger className="bg-red-500 rounded-full p-2 w-[36px] h-[36px] text-white flex justify-center items-center">
+        <DialogTrigger className="bg-red-600 rounded-full p-2 w-[36px] h-[36px] text-white flex justify-center items-center">
           <IoPersonOutline />
         </DialogTrigger>
         <DialogContent>

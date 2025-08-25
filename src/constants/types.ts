@@ -16,6 +16,14 @@ export type FoodCardProps = {
   category: Category;
 };
 
+export type Food = {
+  _id: string;
+  foodName: string;
+  price: number;
+  ingredients?: string;
+  image?: string;   // optional болгож өг
+  category?: string;
+};
 
 
 

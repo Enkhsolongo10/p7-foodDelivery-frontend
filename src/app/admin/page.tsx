@@ -1,56 +1,32 @@
-// 'use client';
-
-// import { AdminFoodCategory } from '../_components/AdminFoodCategory';
-// import { AdminFoodSection } from '../_components/AdminFoodSection';
-
-// export default function AdminPage() {
-//     return(
-//         <div className='flex flex-col ml-7'>
-//             <AdminFoodCategory />
-//             <AdminFoodSection />
-//         </div>
-//     )
-// };
 "use client";
-import AdminSidebar from "../_components/admin-components/SideBar";
-import Pfp from "../_components/admin-components/ProfilePicture";
+
+import {
+  SignedIn,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
 import { FoodCategory } from "../_components/admin-components/FoodCategory";
 import { FoodCardSection } from "../_components/admin-components/FoodCardSection";
-// type Props = {
-//   searchParams: Promise<{ category: string }>;
-// };
+import AdminSidebar from "../_components/admin-components/AdminSideBar";
 
-// type Foods = {
-//   _id: string;
-//   foodName: string;
-//   price: string;
-//   image: string;
-//   ingredients: string;
-//   category: string;
-// };
+export default function ProfilePicture() {
+  const { user } = useUser();
 
-// export default async function Page(props: Props) {
-// const { category } = await props.searchParams;
-// console.log(category);
-// const [foods, setFoods] = useState<Foods[]>([]);
+  if (!user) return null;
 
-// async function getFood() {
-//   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/food/${category}`);
-//   const data = await response.json();
-//   setFoods(data);
-// }
-// useEffect(() => {
-//   getFood();
-// }, [foods]);
-export default function Page() {
   return (
-    <AdminSidebar>
-      <div className="relative">
-        <Pfp />
+    <SignedIn>
+      <div className="flex justify-between">
+        <AdminSidebar />
+        <div className="pr-10">
+          <div className="flex items-center justify-end gap-1 py-6">
+            <p className="font-semibold">{user.fullName}</p>
+            <UserButton />
+          </div>
+          <FoodCategory />
+          <FoodCardSection />
+        </div>
       </div>
-      <FoodCategory />
-      {/* {!category ? <Section /> : <div></div>} */}
-      <FoodCardSection />
-    </AdminSidebar>
+    </SignedIn>
   );
 }

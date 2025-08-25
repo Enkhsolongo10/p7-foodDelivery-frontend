@@ -91,8 +91,8 @@ export function AddFoodDialog({
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <div className="border-2 border-dashed border-red-500 rounded-2xl p-4 w-[270px] h-[241px] flex flex-col items-center justify-center cursor-pointer">
-            <button className="bg-[#EF4444] w-[36px] h-[36px] text-white rounded-full items-center justify-center flex text-2xl">
+          <div className="border-2 border-dashed border-red-600 rounded-2xl p-4 w-[270px] h-[241px] flex flex-col items-center justify-center cursor-pointer">
+            <button className="bg-[#EF4444] w-[36px] h-[36px] bg-red-600 text-white rounded-full items-center justify-center flex text-2xl">
               <IoAddSharp />
             </button>
             <div className="mt-2 text-sm">
@@ -115,12 +115,12 @@ export function AddFoodDialog({
                 value={newFoodName}
                 onChange={(e) => setNewFoodName(e.target.value)}
                 className={`w-full p-2 border rounded mb-1 text-[14px] ${
-                  errors.foodName ? "border-red-500" : "border-gray-300"
+                  errors.foodName ? "border-red-600" : "border-gray-300"
                 }`}
                 disabled={loading}
               />
               {errors.foodName && (
-                <p className="text-red-500 text-sm mb-2">{errors.foodName}</p>
+                <p className="text-red-600 text-sm mb-2">{errors.foodName}</p>
               )}
             </div>
             <div className="w-[184px]">
@@ -131,12 +131,12 @@ export function AddFoodDialog({
                 value={newPrice}
                 onChange={(e) => setNewPrice(e.target.value)}
                 className={`w-full text-[14px] p-2 border rounded mb-1 ${
-                  errors.price ? "border-red-500" : "border-gray-300"
+                  errors.price ? "border-red-600" : "border-gray-300"
                 }`}
                 disabled={loading}
               />
               {errors.price && (
-                <p className="text-red-500 text-sm mb-2">{errors.price}</p>
+                <p className="text-red-600 text-sm mb-2">{errors.price}</p>
               )}
             </div>
           </div>
@@ -147,12 +147,12 @@ export function AddFoodDialog({
               value={newIngredients}
               onChange={(e) => setNewIngredients(e.target.value)}
               className={`w-full p-2 border rounded mb-1 text-[14px] ${
-                errors.ingredients ? "border-red-500" : "border-gray-300"
+                errors.ingredients ? "border-red-600" : "border-gray-300"
               }`}
               disabled={loading}
             />
             {errors.ingredients && (
-              <p className="text-red-500 text-sm mb-2">{errors.ingredients}</p>
+              <p className="text-red-600 text-sm mb-2">{errors.ingredients}</p>
             )}
           </div>
           <div>
